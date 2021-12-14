@@ -30,6 +30,7 @@
   (setq dashboard-startup-banner "~/.emacs.d/minimacs.txt"
         dashboard-center-content t
         dashboard-set-heading-icons t
+	dashboard-show-shortcuts nil
 	dashboard-items '((projects . 3)
 			  (agenda . 5))))
 
@@ -42,7 +43,13 @@
   (progn
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key "ff" 'find-file)
+    (evil-leader/set-key "fs" 'save-buffer)
     (evil-leader/set-key "bb" 'ibuffer)
+    (evil-leader/set-key "bd" 'kill-current-buffer)
+    (evil-leader/set-key "pp" 'projectile-switch-project)
+    (evil-leader/set-key "w" evil-window-map)   
+
+    (evil-leader/set-key "bb" 'run-sbt)
 
 ;   (evil-leader/set-key "<SPC>" 'other-window)
 ;   (evil-leader/set-key "p" 'helm-projectile)
@@ -64,7 +71,9 @@
 
 (use-package doom-modeline
   :ensure t
-  :hook (after-init . doom-modeline-mode))
+  :hook (after-init . doom-modeline-mode)
+  :config
+  (setq doom-modeline-major-mode-color-icon nil))
 
 (use-package tao-theme
   :ensure t
@@ -80,6 +89,7 @@
               ("C-c p" . projectile-command-map)))
 
 (use-package vertico
+  :defer t
   :init
   (vertico-mode)
 
@@ -113,6 +123,7 @@
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
+  :defer t
   :init
   (savehist-mode))
 
@@ -137,3 +148,104 @@
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t))
+
+
+;; Scala
+;; Enable scala-mode for highlighting, indentation and motion commands
+(use-package scala-mode
+  :ensure t
+  :defer t
+  :interpreter
+    ("scala" . scala-mode))
+
+;; Enable sbt mode for executing sbt commands
+(use-package sbt-mode
+  :ensure t
+  :after scala-mode
+  :defer t
+  :commands sbt-start sbt-command
+  :config
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;; allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map)
+   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+  (setq
+   sbt:ansi-support t
+   sbt:program-options '("-Dsbt.supershell=false")))
+
+(defun run-sbt ()
+  "Runs an SBT shell in a dedicated buffer"
+  (interactive)
+  (pop-to-buffer "*sbt*")
+  (sbt-start))
+
+;; Enable nice rendering of diagnostics like compile errors.
+(use-package flycheck
+  :ensure t
+  :defer t
+  :init (global-flycheck-mode))
+
+(use-package lsp-mode
+  :ensure t
+  :defer t
+  ;; Optional - enable lsp-mode automatically in scala files
+  :hook  (scala-mode . lsp)
+         (lsp-mode . lsp-lens-mode)
+  :config
+  ;; Uncomment following section if you would like to tune lsp-mode performance according to
+  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
+  (setq gc-cons-threshold 100000000) ;; 100mb
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+  (setq lsp-idle-delay 0.500)
+  (setq lsp-log-io nil)
+  (setq lsp-completion-provider :capf)
+  (setq lsp-prefer-flymake nil))
+
+;; Add metals backend for lsp-mode
+(use-package lsp-metals
+  :ensure t
+  :defer t)
+
+;; Enable nice rendering of documentation on hover
+;;   Warning: on some systems this package can reduce your emacs responsiveness significally.
+;;   (See: https://emacs-lsp.github.io/lsp-mode/page/performance/)
+;;   In that case you have to not only disable this but also remove from the packages since
+;;   lsp-mode can activate it automatically.
+(use-package lsp-ui
+  :ensure t
+  :defer t)
+
+;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
+;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
+;;   to avoid odd behavior with snippets and indentation
+(use-package yasnippet
+  :ensure t
+  :defer t)
+
+;; Use company-capf as a completion provider.
+;;
+;; To Company-lsp users:
+;;   Company-lsp is no longer maintained and has been removed from MELPA.
+;;   Please migrate to company-capf.
+(use-package company
+  :ensure t
+  :defer t
+  :hook (scala-mode . company-mode)
+  :config
+  (setq lsp-completion-provider :capf))
+
+;; Use the Debug Adapter Protocol for running tests and debugging
+(use-package posframe
+  ;; Posframe is a pop-up tool that must be manually installed for dap-mode
+  :ensure t
+  :defer t
+  )
+(use-package dap-mode
+  :ensure t
+  :defer t
+  :hook
+  (lsp-mode . dap-mode)
+  (lsp-mode . dap-ui-mode))
