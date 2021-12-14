@@ -47,7 +47,7 @@
     (evil-leader/set-key "bb" 'ibuffer)
     (evil-leader/set-key "bd" 'kill-current-buffer)
     (evil-leader/set-key "pp" 'projectile-switch-project)
-    (evil-leader/set-key "w" evil-window-map)   
+    (evil-leader/set-key "w" evil-window-map)
 
     (evil-leader/set-key "bb" 'run-sbt)
 
@@ -177,7 +177,7 @@
    sbt:program-options '("-Dsbt.supershell=false")))
 
 (defun run-sbt ()
-  "Runs an SBT shell in a dedicated buffer"
+  "Run an SBT shell in a dedicated buffer."
   (interactive)
   (pop-to-buffer "*sbt*")
   (sbt-start))
@@ -249,3 +249,16 @@
   :hook
   (lsp-mode . dap-mode)
   (lsp-mode . dap-ui-mode))
+
+;; Magit
+(use-package magit
+  :ensure t
+  :defer t)
+
+(use-package forge
+ :after magit
+ :defer t
+ :config
+ (add-to-list 'forge-alist
+              '("ghe.spotify.net" "ghe.spotify.net/api/v3"
+                "ghe.spotify.net" forge-github-repository)))
