@@ -22,9 +22,11 @@
 ;; Configuration
 (tool-bar-mode -1)
 (set-frame-font "Hack 14" nil t)
+(setq use-package-always-defer t)
 
 ;; Other packages
 (use-package dashboard
+  :demand t
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner "~/.emacs.d/minimacs.txt"
@@ -32,7 +34,8 @@
         dashboard-set-heading-icons t
 	dashboard-show-shortcuts nil
 	dashboard-items '((projects . 3)
-			  (agenda . 5))))
+			  (agenda . 5))
+	dashboard-item-names '(("Agenda for the coming week:" . "Agenda:"))))
 
 (use-package evil-leader
   :commands (evil-leader-mode)
@@ -46,16 +49,16 @@
     (evil-leader/set-key "fs" 'save-buffer)
     (evil-leader/set-key "bb" 'ibuffer)
     (evil-leader/set-key "bd" 'kill-current-buffer)
+    (evil-leader/set-key "gg" 'magit-status)
     (evil-leader/set-key "pp" 'projectile-switch-project)
     (evil-leader/set-key "w" evil-window-map)
+    (evil-leader/set-key "wd" 'delete-window)
+    (evil-leader/set-key "qq" 'save-buffers-kill-emacs)
+    (evil-leader/set-key "qr" 'restart-emacs)
+    (evil-leader/set-key "tF" 'toggle-frame-fullscreen)
 
+    ;; TODO: only in scala-mode
     (evil-leader/set-key "bb" 'run-sbt)
-
-;   (evil-leader/set-key "<SPC>" 'other-window)
-;   (evil-leader/set-key "p" 'helm-projectile)
-;    (evil-leader/set-key "sp" 'helm-projectile-switch-project)
-;    (evil-leader/set-key "f" 'toggle-frame-fullscreen)
-;    (evil-leader/set-key "ra" 'run-python-tests)
     )
   )
 
@@ -63,6 +66,7 @@
   :hook (after-init . evil-mode))
 
 (use-package which-key
+  :demand t
   :config
   (which-key-mode))
 
@@ -70,18 +74,16 @@
   :if (display-graphic-p))
 
 (use-package doom-modeline
-  :ensure t
   :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-major-mode-color-icon nil))
 
 (use-package tao-theme
-  :ensure t
+  :demand t
   :config
   (load-theme 'tao-yang t))
 
 (use-package projectile
-  :ensure t
   :init
   (projectile-mode +1)
   :bind (:map projectile-mode-map
@@ -89,7 +91,6 @@
               ("C-c p" . projectile-command-map)))
 
 (use-package vertico
-  :defer t
   :init
   (vertico-mode)
 
@@ -123,7 +124,6 @@
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  :defer t
   :init
   (savehist-mode))
 
@@ -153,16 +153,12 @@
 ;; Scala
 ;; Enable scala-mode for highlighting, indentation and motion commands
 (use-package scala-mode
-  :ensure t
-  :defer t
   :interpreter
     ("scala" . scala-mode))
 
 ;; Enable sbt mode for executing sbt commands
 (use-package sbt-mode
-  :ensure t
   :after scala-mode
-  :defer t
   :commands sbt-start sbt-command
   :config
   ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
@@ -184,13 +180,9 @@
 
 ;; Enable nice rendering of diagnostics like compile errors.
 (use-package flycheck
-  :ensure t
-  :defer t
   :init (global-flycheck-mode))
 
 (use-package lsp-mode
-  :ensure t
-  :defer t
   ;; Optional - enable lsp-mode automatically in scala files
   :hook  (scala-mode . lsp)
          (lsp-mode . lsp-lens-mode)
@@ -205,25 +197,19 @@
   (setq lsp-prefer-flymake nil))
 
 ;; Add metals backend for lsp-mode
-(use-package lsp-metals
-  :ensure t
-  :defer t)
+(use-package lsp-metals)
 
 ;; Enable nice rendering of documentation on hover
 ;;   Warning: on some systems this package can reduce your emacs responsiveness significally.
 ;;   (See: https://emacs-lsp.github.io/lsp-mode/page/performance/)
 ;;   In that case you have to not only disable this but also remove from the packages since
 ;;   lsp-mode can activate it automatically.
-(use-package lsp-ui
-  :ensure t
-  :defer t)
+(use-package lsp-ui)
 
 ;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
 ;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
 ;;   to avoid odd behavior with snippets and indentation
-(use-package yasnippet
-  :ensure t
-  :defer t)
+(use-package yasnippet)
 
 ;; Use company-capf as a completion provider.
 ;;
@@ -231,29 +217,20 @@
 ;;   Company-lsp is no longer maintained and has been removed from MELPA.
 ;;   Please migrate to company-capf.
 (use-package company
-  :ensure t
-  :defer t
   :hook (scala-mode . company-mode)
   :config
   (setq lsp-completion-provider :capf))
 
 ;; Use the Debug Adapter Protocol for running tests and debugging
-(use-package posframe
-  ;; Posframe is a pop-up tool that must be manually installed for dap-mode
-  :ensure t
-  :defer t
-  )
+;; Posframe is a pop-up tool that must be manually installed for dap-mode
+(use-package posframe)
 (use-package dap-mode
-  :ensure t
-  :defer t
   :hook
   (lsp-mode . dap-mode)
   (lsp-mode . dap-ui-mode))
 
 ;; Magit
-(use-package magit
-  :ensure t
-  :defer t)
+(use-package magit)
 
 (use-package forge
  :after magit
@@ -262,3 +239,12 @@
  (add-to-list 'forge-alist
               '("ghe.spotify.net" "ghe.spotify.net/api/v3"
                 "ghe.spotify.net" forge-github-repository)))
+
+;; Quit confirmation
+(setq confirm-kill-emacs #'y-or-n-p)
+
+;; Restart
+(use-package restart-emacs)
+
+;; org
+(use-package org)
