@@ -37,10 +37,21 @@
 			  (agenda . 5))
 	dashboard-item-names '(("Agenda for the coming week:" . "Agenda:"))))
 
+
+
+(use-package evil
+  :hook (after-init . evil-mode)
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
 (use-package evil-leader
   :commands (evil-leader-mode)
   :ensure evil-leader
   :demand evil-leader
+  :after evil
   :init (global-evil-leader-mode)
   :config
   (progn
@@ -62,8 +73,11 @@
     )
   )
 
-(use-package evil
-  :hook (after-init . evil-mode))
+(use-package evil-collection
+  :after evil
+  :demand t
+  :config
+  (evil-collection-init))
 
 (use-package which-key
   :demand t
@@ -247,4 +261,36 @@
 (use-package restart-emacs)
 
 ;; org
-(use-package org)
+(use-package org
+  :bind
+  ;; from: https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org/config.el
+  ;; Recently, a [tab] keybind in `outline-mode-cycle-map' has begun
+  ;; overriding org's [tab] keybind in GUI Emacs. This is needed to undo
+  ;; that, and should probably be PRed to org.
+  (:map org-mode-map
+	("<tab>" . org-cycle))
+  :config
+  (setq org-agenda-files '("~/Documents/org/agendas"))
+  (setq org-todo-keywords
+	'((sequence
+	   "TODO(t)"  ; A task that needs doing & is ready to do
+	   "PROJ(p)"  ; A project, which usually contains other tasks
+	   "LOOP(r)"  ; A recurring task
+	   "STRT(s)"  ; A task that is in progress
+	   "WAIT(w)"  ; Something external is holding up this task
+	   "HOLD(h)"  ; This task is paused/on hold because of me
+	   "IDEA(i)"  ; An unconfirmed and unapproved task or notion
+	   "|"
+	   "DONE(d)"  ; Task successfully completed
+	   "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
+	  (sequence
+	   "[ ](T)"   ; A task that needs doing
+	   "[-](S)"   ; Task is in progress
+	   "[?](W)"   ; Task is being held up or paused
+	   "|"
+	   "[X](D)")  ; Task was completed
+	  (sequence
+	   "|"
+	   "OKAY(o)"
+	   "YES(y)"
+	   "NO(n)"))))
