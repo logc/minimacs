@@ -26,6 +26,9 @@
 
 ;; Other packages
 (use-package dashboard
+  ;; FIXME: remove after fork changes accepted in emacs-dashboard
+  :straight (dashboard :type git :host github :repo "emacs-dashboard/emacs-dashboard"
+		       :fork (:host github :repo "logc/emacs-dashboard"))
   :demand t
   :config
   (dashboard-setup-startup-hook)
@@ -78,6 +81,12 @@
   :demand t
   :config
   (evil-collection-init))
+
+(use-package evil-surround
+  :demand t
+  :after evil
+  :config
+  (global-evil-surround-mode 1))
 
 (use-package which-key
   :demand t
@@ -231,9 +240,14 @@
 ;;   Company-lsp is no longer maintained and has been removed from MELPA.
 ;;   Please migrate to company-capf.
 (use-package company
-  :hook (scala-mode . company-mode)
+  :hook (after-init . company-mode)
   :config
-  (setq lsp-completion-provider :capf))
+  (setq lsp-completion-provider :capf)
+  (global-company-mode)
+  (setq company-idle-delay 0
+        company-minimum-prefix-length 1
+	company-selection-wrap-around t)
+  (company-tng-configure-default))
 
 ;; Use the Debug Adapter Protocol for running tests and debugging
 ;; Posframe is a pop-up tool that must be manually installed for dap-mode
