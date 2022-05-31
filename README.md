@@ -1,7 +1,9 @@
 <div align="center">
+
 # Minimacs
 
 An Emacs distribution focused on minimalism
+
 </div>
 
 ## Installation
