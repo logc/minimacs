@@ -26,9 +26,6 @@
 
 ;; Other packages
 (use-package dashboard
-  ;; FIXME: remove after fork changes accepted in emacs-dashboard
-  :straight (dashboard :type git :host github :repo "emacs-dashboard/emacs-dashboard"
-		       :fork (:host github :repo "logc/emacs-dashboard"))
   :demand t
   :config
   (dashboard-setup-startup-hook)
