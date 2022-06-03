@@ -4,7 +4,7 @@
 
 An Emacs distribution focused on minimalism
 
-![Minimacs Screenshot](https://raw.githubusercontent.com/logc/minimacs/screenshots/main.png)
+![Minimacs Screenshot](/screenshots/main.png)
 
 </div>
 
