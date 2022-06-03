@@ -4,12 +4,14 @@
 
 An Emacs distribution focused on minimalism
 
+![Minimacs Screenshot](https://raw.githubusercontent.com/logc/minimacs/screenshots/main.png)
+
 </div>
 
 ## Installation
 
 ```shell
-git clone https://github.com/logc/minimacs ~/.emacs.d
+git clone --depth 1 https://github.com/logc/minimacs ~/.emacs.d
 ```
 
 Then start Emacs as you would normally do.
