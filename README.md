@@ -20,9 +20,9 @@ Then start Emacs as you would normally do.
 
 Minimacs installs modes for the development of Scala and Python, and also for writing Org files.
 
-Minimacs only allows two monochrome themes: Tao dark and Tao light. By default, the light theme is selected.
+Minimacs only has two monochrome themes: Tao dark and Tao light. By default, the light theme is selected.
 
-Minimacs uses key bindings inspired by Doom Emacs. You can discover them by pressing the space bar after Emacs finishes loading.
+Minimacs uses key bindings inspired by [Doom Emacs](https://github.com/doomemacs/doomemacs). You can discover them by pressing the space bar after Emacs finishes loading.
 
 ## License
 
