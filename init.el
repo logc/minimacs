@@ -1,3 +1,5 @@
+(setq gc-cons-threshold (* 1024 1024 100))
+
 ;; Install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -19,12 +21,17 @@
 (use-package straight
              :custom (straight-use-package-by-default t))
 
-;; Configuration
+;; Configurations
+
+(menu-bar-mode -1)
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
 (set-frame-font "Hack 14" nil t)
 (setq use-package-always-defer t)
+;; confirm quit
+(setq confirm-kill-emacs #'y-or-n-p)
 
-;; Other packages
+;; Use packages
 (use-package dashboard
   :demand t
   :config
@@ -36,8 +43,6 @@
 	dashboard-items '((projects . 3)
 			  (agenda . 5))
 	dashboard-item-names '(("Agenda for the coming week:" . "Agenda:"))))
-
-
 
 (use-package evil
   :hook (after-init . evil-mode)
@@ -69,9 +74,7 @@
     (evil-leader/set-key "tF" 'toggle-frame-fullscreen)
 
     ;; TODO: only in scala-mode
-    (evil-leader/set-key "bb" 'run-sbt)
-    )
-  )
+    (evil-leader/set-key "bb" 'run-sbt)))
 
 (use-package evil-collection
   :after evil
@@ -264,9 +267,6 @@
  (add-to-list 'forge-alist
               '("ghe.spotify.net" "ghe.spotify.net/api/v3"
                 "ghe.spotify.net" forge-github-repository)))
-
-;; Quit confirmation
-(setq confirm-kill-emacs #'y-or-n-p)
 
 ;; Restart
 (use-package restart-emacs)
