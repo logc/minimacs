@@ -98,10 +98,10 @@
   :config
   (setq doom-modeline-major-mode-color-icon nil))
 
-(use-package tao-theme
+(use-package plan9-theme
   :demand t
   :config
-  (load-theme 'tao-yang t))
+  (load-theme 'plan9 t))
 
 (use-package projectile
   :init
