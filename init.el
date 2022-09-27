@@ -1,4 +1,13 @@
-(setq gc-cons-threshold (* 1024 1024 100))
+;;;; minimacs --- an Emacs distribution focused on minimalism
+
+;;;; Commentary:
+;;;;   inspired by Doom Emacs
+
+;;;; Code:
+
+(setq gc-cons-threshold (* 50 1000 1000))
+
+;;;; Preliminaries:
 
 ;; Install straight.el
 (defvar bootstrap-version)
@@ -16,6 +25,8 @@
 
 ;; Install use-package
 (straight-use-package 'use-package)
+
+;;;; Configurations:
 
 ;; Configure use-package to use straight.el by default
 (use-package straight
@@ -81,6 +92,15 @@
   :demand t
   :config
   (evil-collection-init))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook (org-mode . evil-org-mode)
+  :config
+  (add-to-list 'evil-emacs-state-modes 'org-agenda-mode)
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 (use-package evil-surround
   :demand t
@@ -305,3 +325,8 @@
 	   "OKAY(o)"
 	   "YES(y)"
 	   "NO(n)"))))
+
+;;;; Finish:
+(setq gc-cons-threshold (* 2 1000 1000))
+
+;;; init.el ends here
