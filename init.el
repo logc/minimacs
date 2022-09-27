@@ -326,6 +326,11 @@
 	   "YES(y)"
 	   "NO(n)"))))
 
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
 ;;;; Finish:
 (setq gc-cons-threshold (* 2 1000 1000))
 
