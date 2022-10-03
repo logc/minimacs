@@ -55,58 +55,96 @@
 			  (agenda . 5))
 	dashboard-item-names '(("Agenda for the coming week:" . "Agenda:"))))
 
-(use-package evil
-  :hook (after-init . evil-mode)
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-mode 1))
+(defun meow-setup ()
+  (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+  (meow-motion-overwrite-define-key
+   '("j" . meow-next)
+   '("k" . meow-prev)
+   '("<escape>" . ignore))
+  (meow-leader-define-key
+   ;; SPC j/k will run the original command in MOTION state.
+   '("j" . "H-j")
+   '("k" . "H-k")
+   ;; Use SPC (0-9) for digit arguments.
+   '("1" . meow-digit-argument)
+   '("2" . meow-digit-argument)
+   '("3" . meow-digit-argument)
+   '("4" . meow-digit-argument)
+   '("5" . meow-digit-argument)
+   '("6" . meow-digit-argument)
+   '("7" . meow-digit-argument)
+   '("8" . meow-digit-argument)
+   '("9" . meow-digit-argument)
+   '("0" . meow-digit-argument)
+   '("/" . meow-keypad-describe-key)
+   '("?" . meow-cheatsheet))
+  (meow-normal-define-key
+   '("0" . meow-expand-0)
+   '("9" . meow-expand-9)
+   '("8" . meow-expand-8)
+   '("7" . meow-expand-7)
+   '("6" . meow-expand-6)
+   '("5" . meow-expand-5)
+   '("4" . meow-expand-4)
+   '("3" . meow-expand-3)
+   '("2" . meow-expand-2)
+   '("1" . meow-expand-1)
+   '("-" . negative-argument)
+   '(";" . meow-reverse)
+   '("," . meow-inner-of-thing)
+   '("." . meow-bounds-of-thing)
+   '("[" . meow-beginning-of-thing)
+   '("]" . meow-end-of-thing)
+   '("a" . meow-append)
+   '("A" . meow-open-below)
+   '("b" . meow-back-word)
+   '("B" . meow-back-symbol)
+   '("c" . meow-change)
+   '("d" . meow-delete)
+   '("D" . meow-backward-delete)
+   '("e" . meow-next-word)
+   '("E" . meow-next-symbol)
+   '("f" . meow-find)
+   '("g" . meow-cancel-selection)
+   '("G" . meow-grab)
+   '("h" . meow-left)
+   '("H" . meow-left-expand)
+   '("i" . meow-insert)
+   '("I" . meow-open-above)
+   '("j" . meow-next)
+   '("J" . meow-next-expand)
+   '("k" . meow-prev)
+   '("K" . meow-prev-expand)
+   '("l" . meow-right)
+   '("L" . meow-right-expand)
+   '("m" . meow-join)
+   '("n" . meow-search)
+   '("o" . meow-block)
+   '("O" . meow-to-block)
+   '("p" . meow-yank)
+   '("q" . meow-quit)
+   '("Q" . meow-goto-line)
+   '("r" . meow-replace)
+   '("R" . meow-swap-grab)
+   '("s" . meow-kill)
+   '("t" . meow-till)
+   '("u" . meow-undo)
+   '("U" . meow-undo-in-selection)
+   '("v" . meow-visit)
+   '("w" . meow-mark-word)
+   '("W" . meow-mark-symbol)
+   '("x" . meow-line)
+   '("X" . meow-goto-line)
+   '("y" . meow-save)
+   '("Y" . meow-sync-grab)
+   '("z" . meow-pop-selection)
+   '("'" . repeat)
+   '("<escape>" . ignore)))
 
-(use-package evil-leader
-  :commands (evil-leader-mode)
-  :ensure evil-leader
-  :demand evil-leader
-  :after evil
-  :init (global-evil-leader-mode)
+(use-package meow
   :config
-  (progn
-    (evil-leader/set-leader "<SPC>")
-    (evil-leader/set-key "ff" 'find-file)
-    (evil-leader/set-key "fs" 'save-buffer)
-    (evil-leader/set-key "bb" 'ibuffer)
-    (evil-leader/set-key "bd" 'kill-current-buffer)
-    (evil-leader/set-key "gg" 'magit-status)
-    (evil-leader/set-key "pp" 'projectile-switch-project)
-    (evil-leader/set-key "w" evil-window-map)
-    (evil-leader/set-key "wd" 'delete-window)
-    (evil-leader/set-key "qq" 'save-buffers-kill-emacs)
-    (evil-leader/set-key "qr" 'restart-emacs)
-    (evil-leader/set-key "tF" 'toggle-frame-fullscreen)
-
-    ;; TODO: only in scala-mode
-    (evil-leader/set-key "bb" 'run-sbt)))
-
-(use-package evil-collection
-  :after evil
-  :demand t
-  :config
-  (evil-collection-init))
-
-(use-package evil-org
-  :ensure t
-  :after org
-  :hook (org-mode . evil-org-mode)
-  :config
-  (add-to-list 'evil-emacs-state-modes 'org-agenda-mode)
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
-
-(use-package evil-surround
-  :demand t
-  :after evil
-  :config
-  (global-evil-surround-mode 1))
+  (meow-setup)
+  (meow-global-mode 1))
 
 (use-package which-key
   :demand t
@@ -475,9 +513,7 @@
         ("C-x t C-t" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag)))
 
-(use-package treemacs-evil
-  :after (treemacs evil)
-  :ensure t)
+
 
 (use-package treemacs-projectile
   :after (treemacs projectile)
