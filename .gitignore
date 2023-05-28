@@ -5,3 +5,5 @@ history
 projectile-bookmarks.eld
 straight/
 transient/
+.lsp-session*
+eshell/
