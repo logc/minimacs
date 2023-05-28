@@ -33,10 +33,10 @@
   ;; Use coreutils gls for dired
   (setq insert-directory-program "/opt/homebrew/bin/gls"))
 
-(use-package acme-theme
+(use-package nord-theme
   :demand t
   :config
-  (load-theme 'acme t))
+  (load-theme 'nord t))
 
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
@@ -63,9 +63,14 @@
   :config
   (which-key-mode))
 
+
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1))
+
+(use-package direnv
+ :config
+ (direnv-mode))
 
 (use-package projectile
   :init
@@ -117,7 +122,7 @@
 
 (use-package lsp-mode
   ;; Optional - enable lsp-mode automatically in scala files
-  :hook  (scala-mode . lsp)
+  :hook  (prog-mode . lsp)
   (lsp-mode . lsp-lens-mode)
   :config
   ;; Uncomment following section if you would like to tune lsp-mode performance according to
