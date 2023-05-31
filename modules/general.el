@@ -191,3 +191,6 @@
 (use-package nerd-icons
   :custom
   (nerd-icons-font-family "Symbols Nerd Font Mono"))
+
+(use-package vterm
+    :ensure t)
