@@ -156,7 +156,7 @@
 
 (use-package lsp-mode
   ;; Optional - enable lsp-mode automatically in scala files
-  :hook  (prog-mode . lsp)
+  :hook  (prog-mode . lsp-deferred)
   (lsp-mode . lsp-lens-mode)
   :config
   ;; Uncomment following section if you would like to tune lsp-mode performance according to
@@ -166,7 +166,10 @@
   (setq lsp-idle-delay 0.500)
   (setq lsp-log-io nil)
   (setq lsp-completion-provider :capf)
-  (setq lsp-prefer-flymake nil))
+  (setq lsp-prefer-flymake nil)
+  ;; Disable warning when mode derives from prog-mode but does not have LSP e.g. elisp
+  (setq lsp-warn-no-matched-clients nil)
+  )
 
 ;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
 ;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
@@ -275,10 +278,19 @@ default lsp-passthrough."
   :hook
   (dired-mode . nerd-icons-dired-mode))
 
-
 (use-package nerd-icons
   :custom
   (nerd-icons-font-family "Symbols Nerd Font Mono"))
 
+;; Here 'completion' means 'vertico'
+(use-package nerd-icons-completion
+  :after (marginalia nerd-icons)
+  :demand t
+  :hook (marginalia-mode . nerd-icons-completion-marginalia-setup)
+  :config
+  (nerd-icons-completion-mode))
+
 (use-package vterm
     :ensure t)
+
+(use-package helpful)
