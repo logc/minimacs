@@ -5,6 +5,14 @@
 ;; Configurations
 (use-package emacs
   :init
+  (load-theme 'modus-vivendi-tritanopia :no-confirm)
+  (setq
+   explicit-shell-file-name "/opt/homebrew/bin/fish"
+   multi-term-program       explicit-shell-file-name
+   shell-file-name          explicit-shell-file-name
+   projectile-project-search-path '("~/Documents/code/work/emacs"
+				    "~/Documents/code/personal"))
+
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; Alternatively try `consult-completing-read-multiple'.
   (defun crm-indicator (args)
@@ -41,13 +49,13 @@
   (custom-set-variables '(epg-gpg-program  "/opt/homebrew/bin/gpg"))
   (epa-file-enable))
 
-(use-package nord-theme
-  :demand t
-  :config
-  (load-theme 'nord t))
-
-(use-package acme-theme
-  :demand t)
+;(use-package nord-theme
+;  :demand t
+;  :config
+;  (load-theme 'nord t))
+;
+;(use-package acme-theme
+;  :demand t)
 
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
