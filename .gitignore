@@ -7,3 +7,6 @@ straight/
 transient/
 .lsp-session*
 eshell/
+.dap-breakpoints
+elpa/
+projects
