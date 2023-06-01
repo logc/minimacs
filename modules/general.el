@@ -88,6 +88,18 @@
 	      ("C-c p" . projectile-command-map)))
 
 (use-package vertico
+  :straight (vertico :files (:defaults "extensions/*")
+                     :includes (vertico-indexed
+                                vertico-flat
+                                vertico-grid
+                                vertico-mouse
+                                vertico-quick
+                                vertico-buffer
+                                vertico-repeat
+                                vertico-reverse
+                                vertico-directory
+                                vertico-multiform
+                                vertico-unobtrusive))
   :init
   (vertico-mode)
 
@@ -103,6 +115,10 @@
   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
   ;; (setq vertico-cycle t)
   )
+
+(use-package vertico-posframe
+  :hook (vertico-mode . vertico-posframe-mode)
+  :init (vertico-posframe-mode 1))
 
 ;; Optionally use the `orderless' completion style. See
 ;; `+orderless-dispatch' in the Consult wiki for an advanced Orderless style
