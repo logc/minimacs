@@ -180,7 +180,10 @@
 ;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
 ;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
 ;;   to avoid odd behavior with snippets and indentation
-(use-package yasnippet)
+(use-package yasnippet
+  :hook (prog-mode . yas-minor-mode)
+  :config
+  (yas-reload-all))
 
 (use-package corfu
   :hook (lsp-completion-mode . kb/corfu-setup-lsp) ; Use corfu for lsp completion
