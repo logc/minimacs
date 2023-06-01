@@ -73,17 +73,14 @@
   :config
   (which-key-mode))
 
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
+(use-package mood-line
+  :demand t
+  :config (mood-line-mode))
 
-(use-package direnv
- :config
- (direnv-mode))
+(use-package direnv :config (direnv-mode))
 
 (use-package projectile
-  :init
-  (projectile-mode +1)
+  :init (projectile-mode +1)
   :bind (:map projectile-mode-map
 	      ("s-p" . projectile-command-map)
 	      ("C-c p" . projectile-command-map)))
