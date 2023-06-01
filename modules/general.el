@@ -56,7 +56,6 @@
   :config
   (smartparens-global-mode t))
 
-;; Use packages
 (use-package dashboard
   :demand t
   :config
@@ -73,7 +72,6 @@
   :demand t
   :config
   (which-key-mode))
-
 
 (use-package doom-modeline
   :ensure t
