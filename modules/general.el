@@ -176,17 +176,6 @@
 ;;   to avoid odd behavior with snippets and indentation
 (use-package yasnippet)
 
-;; Use company-capf as a completion provider.
-;(use-package company
-;  :hook (after-init . company-mode)
-;  :config
-;  (setq lsp-completion-provider :capf)
-;  (global-company-mode)
-;  (setq company-idle-delay 0
-;	company-minimum-prefix-length 2
-;	company-selection-wrap-around t)
-;  (company-tng-configure-default))
-
 (use-package corfu
   :hook (lsp-completion-mode . kb/corfu-setup-lsp) ; Use corfu for lsp completion
   :custom
