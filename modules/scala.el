@@ -45,11 +45,3 @@
   ;; which is mapped to `keyword' face.
   (lsp-metals-enable-semantic-highlighting t)
   :hook (scala-mode . lsp))
-
-
-;; Enable nice rendering of documentation on hover
-;;   Warning: on some systems this package can reduce your emacs responsiveness significally.
-;;   (See: https://emacs-lsp.github.io/lsp-mode/page/performance/)
-;;   In that case you have to not only disable this but also remove from the packages since
-;;   lsp-mode can activate it automatically.
-(use-package lsp-ui)

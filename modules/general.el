@@ -152,27 +152,9 @@
 (use-package flycheck
   :init (global-flycheck-mode))
 
-(use-package lsp-mode
-  ;; Optional - enable lsp-mode automatically in scala files
-  :hook  (prog-mode . lsp-deferred)
-  (lsp-mode . lsp-lens-mode)
-  :config
-  ;; Uncomment following section if you would like to tune lsp-mode performance according to
-  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-  (setq gc-cons-threshold 100000000) ;; 100mb
-  (setq read-process-output-max (* 1024 1024)) ;; 1mb
-  (setq lsp-idle-delay 0.500)
-  (setq lsp-log-io nil)
-  (setq lsp-completion-provider :capf)
-  (setq lsp-prefer-flymake nil)
-  ;; Disable warning when mode derives from prog-mode but does not have LSP e.g. elisp
-  (setq lsp-warn-no-matched-clients nil)
-  )
-
-;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
-;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
-;;   to avoid odd behavior with snippets and indentation
-(use-package yasnippet)
+(use-package eglot
+  ;; (optional) Automatically start metals for Scala files.
+  :hook (prog-mode . eglot-ensure))
 
 (use-package corfu
   :hook (lsp-completion-mode . kb/corfu-setup-lsp) ; Use corfu for lsp completion
@@ -232,14 +214,7 @@ default lsp-passthrough."
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
           '(orderless))))
 
-;; Use the Debug Adapter Protocol for running tests and debugging
-;; Posframe is a pop-up tool that must be manually installed for dap-mode
 (use-package posframe)
-
-(use-package dap-mode
-  :hook
-  (lsp-mode . dap-mode)
-  (lsp-mode . dap-ui-mode))
 
 ;; Restart
 (use-package restart-emacs)
