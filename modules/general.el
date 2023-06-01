@@ -5,7 +5,7 @@
 ;; Configurations
 (use-package emacs
   :init
-  (load-theme 'modus-vivendi-tritanopia :no-confirm)
+  (load-theme 'modus-operandi-tinted :no-confirm)
   (setq
    explicit-shell-file-name "/opt/homebrew/bin/fish"
    multi-term-program       explicit-shell-file-name
@@ -48,14 +48,6 @@
   (require 'epa-file)
   (custom-set-variables '(epg-gpg-program  "/opt/homebrew/bin/gpg"))
   (epa-file-enable))
-
-;(use-package nord-theme
-;  :demand t
-;  :config
-;  (load-theme 'nord t))
-;
-;(use-package acme-theme
-;  :demand t)
 
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
