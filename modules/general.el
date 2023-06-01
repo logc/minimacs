@@ -30,21 +30,24 @@
   (set-frame-font "Berkeley Mono 14" nil t)
   (setq use-package-always-defer t)
   (setq confirm-kill-emacs #'y-or-n-p)
+  
   ;; Use Command-x as M-x, but removes s-l for LSP
-					;(setq mac-command-modifier 'meta)
+  ;(setq mac-command-modifier 'meta)
   ;; Use coreutils gls for dired
   (setq insert-directory-program "/opt/homebrew/bin/gls")
+
   ;; GPG settings
   (require 'epa-file)
   (custom-set-variables '(epg-gpg-program  "/opt/homebrew/bin/gpg"))
-  (epa-file-enable)
-
-  )
+  (epa-file-enable))
 
 (use-package nord-theme
   :demand t
   :config
   (load-theme 'nord t))
+
+(use-package acme-theme
+  :demand t)
 
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
