@@ -15,6 +15,7 @@
   :config
   (progn
     (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key "<SPC>" 'execute-extended-command)
     (evil-leader/set-key "ff" 'find-file)
     (evil-leader/set-key "fs" 'save-buffer)
     (evil-leader/set-key "bb" 'ibuffer)
