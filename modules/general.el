@@ -10,24 +10,13 @@
    explicit-shell-file-name "/opt/homebrew/bin/fish"
    multi-term-program       explicit-shell-file-name
    shell-file-name          explicit-shell-file-name
-   projectile-project-search-path '("~/Documents/code/work/emacs"
+   projectile-project-search-path '("~/Documents/code/work/"
 				    "~/Documents/code/personal"))
-
-  ;; Add prompt indicator to `completing-read-multiple'.
-  ;; Alternatively try `consult-completing-read-multiple'.
-  (defun crm-indicator (args)
-    (cons (concat "[CRM] " (car args)) (cdr args)))
-  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
   ;; Do not allow the cursor in the minibuffer prompt
   (setq minibuffer-prompt-properties
 	'(read-only t cursor-intangible t face minibuffer-prompt))
   (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
-
-  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
-  ;; Vertico commands are hidden in normal buffers.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t)
@@ -39,15 +28,11 @@
   (setq use-package-always-defer t)
   (setq confirm-kill-emacs #'y-or-n-p)
   
-  ;; Use Command-x as M-x, but removes s-l for LSP
-  ;(setq mac-command-modifier 'meta)
   ;; Use coreutils gls for dired
   (setq insert-directory-program "/opt/homebrew/bin/gls")
 
   ;; GPG settings
-  (require 'epa-file)
-  (custom-set-variables '(epg-gpg-program  "/opt/homebrew/bin/gpg"))
-  (epa-file-enable))
+  (custom-set-variables '(epg-gpg-program  "/opt/homebrew/bin/gpg")))
 
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
@@ -65,8 +50,7 @@
 	dashboard-set-heading-icons t
 	dashboard-show-shortcuts nil
 	dashboard-items '((projects . 3)
-			  (agenda . 5))
-	dashboard-item-names '(("Agenda for the coming week:" . "Agenda:"))))
+			  (agenda . 5))))
 
 (use-package which-key
   :demand t
@@ -99,20 +83,7 @@
                                 vertico-multiform
                                 vertico-unobtrusive))
   :init
-  (vertico-mode)
-
-  ;; Different scroll margin
-  ;; (setq vertico-scroll-margin 0)
-
-  ;; Show more candidates
-  ;; (setq vertico-count 20)
-
-  ;; Grow and shrink the Vertico minibuffer
-  ;; (setq vertico-resize t)
-
-  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-  ;; (setq vertico-cycle t)
-  )
+  (vertico-mode))
 
 (use-package vertico-posframe
   :hook (vertico-mode . vertico-posframe-mode)
