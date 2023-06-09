@@ -1,6 +1,10 @@
 ;; Disable package.el in favor of straight.el
 (setq package-enable-at-startup nil)
 
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
 (defmacro with-gc-cons-threshold (threshold &rest body)
   "Execute BODY with GC threshold temporarily set to THRESHOLD.
    Log the current GC threshold before and after the block is executed."

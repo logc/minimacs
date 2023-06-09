@@ -2,9 +2,7 @@
 
 # Minimacs
 
-An Emacs distribution focused on minimalism
-
-![Minimacs Screenshot](/screenshots/main.png)
+My personal Emacs configuration
 
 </div>
 
@@ -18,9 +16,9 @@ Then start Emacs as you would normally do.
 
 ## Usage
 
-Minimacs installs modes for the development of Scala and Python, and also for writing Org files.
+Minimacs uses key bindings that start with `SPC`. You can discover them by pressing the space bar after Emacs finishes loading.
 
-Minimacs uses key bindings inspired by [Doom Emacs](https://github.com/doomemacs/doomemacs). You can discover them by pressing the space bar after Emacs finishes loading.
+`M-x` is remapped to `SPC SPC` for quick access.
 
 ## License
 

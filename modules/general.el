@@ -5,7 +5,6 @@
 ;; Configurations
 (use-package emacs
   :init
-  (load-theme 'modus-operandi-tinted :no-confirm)
   (setq
    explicit-shell-file-name "/opt/homebrew/bin/fish"
    multi-term-program       explicit-shell-file-name
@@ -20,10 +19,8 @@
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t)
+
   :config
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
   (set-frame-font "Berkeley Mono 14" nil t)
   (setq use-package-always-defer t)
   (setq confirm-kill-emacs #'y-or-n-p)
@@ -33,6 +30,11 @@
 
   ;; GPG settings
   (custom-set-variables '(epg-gpg-program  "/opt/homebrew/bin/gpg")))
+
+(use-package moe-theme
+  :demand t
+  :config
+  (load-theme 'moe-dark :no-confirm))
 
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
