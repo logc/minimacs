@@ -1,4 +1,8 @@
-;; Magit
+;;; magit.el --- -*- lexical-binding: t; -*-
+
+;;; Commentary:
+
+;;; Code:
 (use-package magit)
 
 (use-package forge
@@ -8,3 +12,5 @@
   (add-to-list 'forge-alist
 	       '("ghe.spotify.net" "ghe.spotify.net/api/v3"
 		 "ghe.spotify.net" forge-github-repository)))
+
+;;; magit.el ends here

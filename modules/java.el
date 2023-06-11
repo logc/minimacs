@@ -1,6 +1,10 @@
-;; Java
+;;; java.el --- -*- lexical-binding: t; -*-
 
-;; switch java
+;;; Commentary:
+;;;   switch java version from inside Emacs; NOT about developing Java
+;;;   applications directly
+
+;;; Code:
 
 (setq JAVA_BASE "/Library/Java/JavaVirtualMachines")
 
@@ -52,3 +56,5 @@
   (interactive)
   ;; displays current java version
   (message (concat "Java HOME: " (getenv "JAVA_HOME"))))
+
+;;; java.el ends here

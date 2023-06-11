@@ -1,5 +1,10 @@
-;; Scala
-;; Enable scala-mode for highlighting, indentation and motion commands
+;;; scala.el --- -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;;;   configure pacakges for Scala development; mostly taken from
+;;;   https://scalameta.org/metals/docs/editors/emacs/
+
+;;; Code:
 (use-package scala-mode
   :interpreter
   ("scala" . scala-mode))
@@ -53,3 +58,5 @@
 ;;   In that case you have to not only disable this but also remove from the packages since
 ;;   lsp-mode can activate it automatically.
 (use-package lsp-ui)
+
+;;; scala.el ends here

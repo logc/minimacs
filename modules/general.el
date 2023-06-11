@@ -1,11 +1,18 @@
-; Configure use-package to use straight.el by default
+;;; general.el --- -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;;;  general configuration settings that either involve the `emacs` package, or affect the whole experience like theming
+
+;;; Code:
 (use-package straight
   :custom (straight-use-package-by-default t))
 
-;; Configurations
 (use-package emacs
   :init
+  (setq gc-cons-threshold 100000000) ;; 100mb for LSP
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb for LSP
   (setq
+   column-number-mode       t
    explicit-shell-file-name "/opt/homebrew/bin/fish"
    multi-term-program       explicit-shell-file-name
    shell-file-name          explicit-shell-file-name
@@ -33,12 +40,7 @@
 
 (use-package moe-theme
   :demand t
-
-  :init 
-  (setq moe-theme-modeline-color 'green)
-
-  :config
-  (load-theme 'moe-dark :no-confirm))
+  :config (load-theme 'moe-dark :no-confirm))
 
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
@@ -95,17 +97,8 @@
   :hook (vertico-mode . vertico-posframe-mode)
   :init (vertico-posframe-mode 1))
 
-;; Optionally use the `orderless' completion style. See
-;; `+orderless-dispatch' in the Consult wiki for an advanced Orderless style
-;; dispatcher. Additionally enable `partial-completion' for file path
-;; expansion. `partial-completion' is important for wildcard support.
-;; Multiple files can be opened at once with `find-file' if you enter a
-;; wildcard. You may also give the `initials' completion style a try.
 (use-package orderless
   :init
-  ;; Configure a custom style dispatcher (see the Consult wiki)
-  ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
-  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
   (setq completion-styles '(orderless basic)
 	completion-category-defaults nil
 	completion-category-overrides '((file (styles partial-completion)))))
@@ -117,39 +110,25 @@
   :init
   (marginalia-mode))
 
-;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
   :init
   (savehist-mode))
 
-;; Enable nice rendering of diagnostics like compile errors.
 (use-package flycheck
   :init (global-flycheck-mode))
 
 (use-package lsp-mode
-  ;; Optional - enable lsp-mode automatically in scala files
   :hook  (prog-mode . lsp-deferred)
   (lsp-mode . lsp-lens-mode)
   :config
-  ;; Uncomment following section if you would like to tune lsp-mode performance according to
-  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-  (setq gc-cons-threshold 100000000) ;; 100mb
-  (setq read-process-output-max (* 1024 1024)) ;; 1mb
   (setq lsp-idle-delay 0.500)
   (setq lsp-log-io nil)
   (setq lsp-completion-provider :capf)
   (setq lsp-prefer-flymake nil)
   ;; Disable warning when mode derives from prog-mode but does not have LSP e.g. elisp
   (setq lsp-warn-no-matched-clients nil)
+  (setq lsp-enable-snippet nil)
   )
-
-;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
-;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
-;;   to avoid odd behavior with snippets and indentation
-(use-package yasnippet
-  :hook (prog-mode . yas-minor-mode)
-  :config
-  (yas-reload-all))
 
 (use-package corfu
   :hook (lsp-completion-mode . kb/corfu-setup-lsp) ; Use corfu for lsp completion
@@ -209,15 +188,6 @@ default lsp-passthrough."
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
           '(orderless))))
 
-;; Use the Debug Adapter Protocol for running tests and debugging
-;; Posframe is a pop-up tool that must be manually installed for dap-mode
-(use-package posframe)
-
-(use-package dap-mode
-  :hook
-  (lsp-mode . dap-mode)
-  (lsp-mode . dap-ui-mode))
-
 ;; Restart
 (use-package restart-emacs)
 
@@ -258,3 +228,5 @@ default lsp-passthrough."
     :ensure t)
 
 (use-package helpful)
+
+;;; general.el ends here

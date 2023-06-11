@@ -1,3 +1,9 @@
+;;; evils.el --- -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;;;  configuration of evil-mode and evil-related packages like evil-collection
+
+;;; Code:
 (use-package evil
   :hook (after-init . evil-mode)
   :init
@@ -51,3 +57,5 @@
   :after evil
   :config
   (global-evil-surround-mode 1))
+
+;;; evils.el ends here

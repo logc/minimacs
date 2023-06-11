@@ -1,4 +1,9 @@
-;; org
+;;; orgs.el --- -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;;;   configuration of org-mode
+
+;;; Code:
 (use-package org
   :bind
   ;; from: https://github.com/hlissner/doom-emacs/blob/develop/modules/lang/org/config.el
@@ -37,3 +42,5 @@
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+;;; orgs.el ends here

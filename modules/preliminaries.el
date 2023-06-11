@@ -1,4 +1,10 @@
-;; Install straight.el
+;;; preliminaries.el --- -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;;;   preliminary installation like straight and use-package; should go BEFORE
+;;;   anything else except early-init.el
+
+;;; Code:
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -17,3 +23,5 @@
 
 ;; Supress compilation warnings
 (setq warning-suppress-log-types '((comp)))
+
+;;; preliminaries.el ends here

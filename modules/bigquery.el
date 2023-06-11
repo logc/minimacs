@@ -1,5 +1,10 @@
-;; BigQuery
-;; inspired by https://github.com/isamert/dotfiles/blob/master/emacs/index.org
+;;; bigquery.el --- -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;;;  configure packages and functions to work with BigQuery
+;;;  inspired by https://github.com/isamert/dotfiles/blob/master/emacs/index.org
+
+;;; Code:
 (define-derived-mode bqsql-mode sql-mode "bqsql-mode")
 (add-to-list 'auto-mode-alist (cons (rx ".bqsql" string-end) #'bqsql-mode))
 
@@ -180,3 +185,5 @@ total {rows,bytes} etc. and first 10 rows of the table."
        (logc/shell-command
 	:buffer-name buffer-name
 	:command (format "bq head -n 10 '%s'" table-name))))))
+
+;;; bigquery.el ends here
