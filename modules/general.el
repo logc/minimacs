@@ -33,6 +33,10 @@
 
 (use-package moe-theme
   :demand t
+
+  :init 
+  (setq moe-theme-modeline-color 'green)
+
   :config
   (load-theme 'moe-dark :no-confirm))
 
@@ -59,9 +63,9 @@
   :config
   (which-key-mode))
 
-(use-package mood-line
-  :demand t
-  :config (mood-line-mode))
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
 
 (use-package direnv :config (direnv-mode))
 
