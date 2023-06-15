@@ -9,7 +9,6 @@
 
 (use-package emacs
   :init
-  (setq gc-cons-threshold 100000000) ;; 100mb for LSP
   (setq read-process-output-max (* 1024 1024)) ;; 1mb for LSP
   (setq
    column-number-mode       t
@@ -28,6 +27,7 @@
   (setq enable-recursive-minibuffers t)
 
   :config
+  (setq-default window-size-fixed t)
   (set-frame-font "Berkeley Mono 14" nil t)
   (setq use-package-always-defer t)
   (setq confirm-kill-emacs #'y-or-n-p)
@@ -38,9 +38,9 @@
   ;; GPG settings
   (custom-set-variables '(epg-gpg-program  "/opt/homebrew/bin/gpg")))
 
-(use-package moe-theme
+(use-package acme-theme
   :demand t
-  :config (load-theme 'moe-dark :no-confirm))
+  :init (load-theme 'acme :no-confirm))
 
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
@@ -65,9 +65,22 @@
   :config
   (which-key-mode))
 
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
+(use-package minions
+  :defer 0.1
+  :config
+  (setq minions-mode-line-lighter "[+]")
+  (minions-mode 1))
+
+(use-package mood-line
+  :demand t
+  :defer 0.1
+  :after minions
+  :config
+  (defun mood-line-segment-major-mode ()
+    "Displays the current major mode in the mode-line."
+    (concat (format-mode-line minions-mode-line-modes 'mood-line-major-mode) "  "))
+   (mood-line-mode))
+
 
 (use-package direnv :config (direnv-mode))
 
