@@ -30,7 +30,7 @@
   (setq enable-recursive-minibuffers t)
 
   :config
-  (set-frame-font "Hack 18" nil t)
+  (set-frame-font "Hack 14" nil t)
   (setq use-package-always-defer t)
   (setq confirm-kill-emacs #'y-or-n-p)
 
