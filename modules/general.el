@@ -16,11 +16,10 @@
 
   (setq
    column-number-mode       t
-   explicit-shell-file-name "/opt/homebrew/bin/fish"
+   explicit-shell-file-name "/usr/bin/fish"
    multi-term-program       explicit-shell-file-name
    shell-file-name          explicit-shell-file-name
-   projectile-project-search-path '("~/Documents/code/work/"
-				    "~/Documents/code/personal"))
+   projectile-project-search-path '("~/Documents/code/"))
 
   ;; Do not allow the cursor in the minibuffer prompt
   (setq minibuffer-prompt-properties
@@ -31,15 +30,9 @@
   (setq enable-recursive-minibuffers t)
 
   :config
-  (set-frame-font "Berkeley Mono 14" nil t)
+  (set-frame-font "Hack 18" nil t)
   (setq use-package-always-defer t)
   (setq confirm-kill-emacs #'y-or-n-p)
-  
-  ;; Use coreutils gls for dired
-  (setq insert-directory-program "/opt/homebrew/bin/gls")
-
-  ;; GPG settings
-  (setq epg-gpg-program "/opt/homebrew/bin/gpg")
 
   ;; Settings for backup files
   (setq backup-directory-alist '(("." . "~/.config/emacs/backups"))
@@ -49,9 +42,6 @@
         kept-new-versions 20   ; how many of the newest versions to keep
         kept-old-versions 5    ; and how many of the old
 	)
-
-  ;; Make other-frame work on MacOS
-  (setq mac-frame-tabbing nil)
 
   ;; Keep track of recent files
   (recentf-mode 1)
@@ -73,7 +63,7 @@
 
   ;; Line numbers in programming modes
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-  )
+)
 
 ;; Theme
 (use-package doom-themes

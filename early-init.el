@@ -26,29 +26,3 @@
            ,@body)
        (setq gc-cons-threshold ,orig-gc-threshold)
        (message "Restored GC threshold: %s" gc-cons-threshold))))
-
-(defun set-exec-path-from-shell-PATH ()
-  "Set up Emacs' `exec-path' and PATH environment variable to match
-that used by the user's shell.
-
-This is particularly useful under Mac OS X and macOS, where GUI
-apps are not started from a shell."
-  (interactive)
-  (let ((path-from-shell (replace-regexp-in-string
-			  "[ \t\n]*$" "" (shell-command-to-string
-					  "/bin/zsh --login -c 'echo $PATH'"
-						    ))))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-(set-exec-path-from-shell-PATH)
-
-;; HACK Work around native compilation on macOS failing with 'ld: library not
-;; found for -lemutls_w'.
-;; https://github.com/d12frosted/homebrew-emacs-plus/issues/554
-(setenv "LIBRARY_PATH"
-	(string-join
-	 '("/opt/homebrew/opt/gcc/lib/gcc/13"
-	   "/opt/homebrew/opt/libgccjit/lib/gcc/13"
-	   "/opt/homebrew/opt/gcc/lib/gcc/13/gcc/aarch64-apple-darwin22/13")
-	 ":"))

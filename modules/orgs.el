@@ -13,6 +13,7 @@
   (:map org-mode-map
 	("<tab>" . org-cycle))
   :config
+<<<<<<< HEAD
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((latex . t)
@@ -25,6 +26,9 @@
   (require 'org-tempo)
 
   (setq org-agenda-files '("~/Dropbox/Documents/org/agendas/"))
+=======
+  (setq org-agenda-files '("~/Documents/org/agendas/"))
+>>>>>>> fbbedbb (Adapt to Debian OS)
   (setq org-todo-keywords
 	'((sequence
 	   "TODO(t)"  ; A task that needs doing & is ready to do
