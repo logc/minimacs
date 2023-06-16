@@ -13,6 +13,7 @@
   (:map org-mode-map
 	("<tab>" . org-cycle))
   :config
+
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((latex . t)
