@@ -81,6 +81,10 @@
     (concat (format-mode-line minions-mode-line-modes 'mood-line-major-mode) "  "))
    (mood-line-mode))
 
+(use-package hide-mode-line
+  :demand t
+  :hook (dashboard-after-initialize-hook . hide-mode-line-mode))
+
 
 (use-package direnv :config (direnv-mode))
 
