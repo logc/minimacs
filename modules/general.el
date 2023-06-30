@@ -37,9 +37,11 @@
   ;; GPG settings
   (custom-set-variables '(epg-gpg-program  "/opt/homebrew/bin/gpg")))
 
-(use-package acme-theme
+(use-package color-theme-sanityinc-tomorrow
   :demand t
-  :init (load-theme 'acme :no-confirm))
+  :init (load-theme 'sanityinc-tomorrow-night :no-confirm))
+
+
 
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
