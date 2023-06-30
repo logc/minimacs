@@ -27,7 +27,6 @@
   (setq enable-recursive-minibuffers t)
 
   :config
-  (setq-default window-size-fixed t)
   (set-frame-font "Berkeley Mono 14" nil t)
   (setq use-package-always-defer t)
   (setq confirm-kill-emacs #'y-or-n-p)
