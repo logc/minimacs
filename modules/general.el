@@ -1,7 +1,8 @@
 ;;; general.el --- -*- lexical-binding: t; -*-
 
 ;;; Commentary:
-;;;  general configuration settings that either involve the `emacs` package, or affect the whole experience like theming
+;;;  general configuration settings that either involve the `emacs` package,
+;;;  or affect the whole experience like theming
 
 ;;; Code:
 (use-package straight
