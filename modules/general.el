@@ -42,8 +42,6 @@
   :demand t
   :init (load-theme 'sanityinc-tomorrow-night :no-confirm))
 
-
-
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
   :init
@@ -146,8 +144,7 @@
   (setq lsp-prefer-flymake nil)
   ;; Disable warning when mode derives from prog-mode but does not have LSP e.g. elisp
   (setq lsp-warn-no-matched-clients nil)
-  (setq lsp-enable-snippet nil)
-  )
+  (setq lsp-enable-snippet nil))
 
 (use-package corfu
   :hook (lsp-completion-mode . kb/corfu-setup-lsp) ; Use corfu for lsp completion
@@ -248,4 +245,6 @@ default lsp-passthrough."
 
 (use-package helpful)
 
+(use-package ansi-color
+    :hook (compilation-filter . ansi-color-compilation-filter)) 
 ;;; general.el ends here
