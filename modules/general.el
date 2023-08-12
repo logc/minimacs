@@ -36,7 +36,20 @@
   (setq insert-directory-program "/opt/homebrew/bin/gls")
 
   ;; GPG settings
-  (custom-set-variables '(epg-gpg-program  "/opt/homebrew/bin/gpg")))
+  (custom-set-variables '(epg-gpg-program  "/opt/homebrew/bin/gpg"))
+
+  ;; Settings for backup files
+  (setq backup-directory-alist '(("." . "~/.config/emacs/backups"))
+        backup-by-copying t    ; Don't delink hardlinks
+        version-control t      ; Use version numbers on backups
+        delete-old-versions t  ; Automatically delete excess backups
+        kept-new-versions 20   ; how many of the newest versions to keep
+        kept-old-versions 5    ; and how many of the old
+	)
+
+  ;; Make other-frame work on MacOS
+  (setq mac-frame-tabbing nil)
+  )
 
 (use-package color-theme-sanityinc-tomorrow
   :demand t
@@ -86,7 +99,10 @@
   :hook (dashboard-after-initialize-hook . hide-mode-line-mode))
 
 
-(use-package direnv :config (direnv-mode))
+(use-package direnv
+  :demand t
+  :config
+  (direnv-mode))
 
 (use-package projectile
   :init (projectile-mode +1)
@@ -247,4 +263,6 @@ default lsp-passthrough."
 
 (use-package ansi-color
     :hook (compilation-filter . ansi-color-compilation-filter)) 
+
+(use-package tabspaces)
 ;;; general.el ends here

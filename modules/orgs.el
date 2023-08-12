@@ -13,7 +13,7 @@
   (:map org-mode-map
 	("<tab>" . org-cycle))
   :config
-  (setq org-agenda-files '("~/Documents/org/agendas"))
+  (setq org-agenda-files '("~/Dropbox/Documents/org/agendas/"))
   (setq org-todo-keywords
 	'((sequence
 	   "TODO(t)"  ; A task that needs doing & is ready to do
@@ -40,7 +40,6 @@
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
+  :config
+  (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 ;;; orgs.el ends here

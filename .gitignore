@@ -1,5 +1,6 @@
 .cache/
 auto-save-list/
+backups/
 eln-cache/
 history
 projectile-bookmarks.eld
@@ -9,6 +10,7 @@ transient/
 eshell/
 .dap-breakpoints
 elpa/
+url/
 projects
 recentf
 bookmarks
