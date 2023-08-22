@@ -13,9 +13,9 @@
 ;(with-gc-cons-threshold
 (setq gc-cons-threshold (* 100 1024 1024))
 (load-from-modules "preliminaries.el")
-(load-from-modules "orgs.el")
 (load-from-modules "general.el")
 (load-from-modules "evils.el")
+(load-from-modules "orgs.el")
 (load-from-modules "java.el")
 (load-from-modules "magit.el")
 (load-from-modules "python.el")

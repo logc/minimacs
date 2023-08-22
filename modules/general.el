@@ -11,6 +11,11 @@
 (use-package emacs
   :init
   (setq read-process-output-max (* 1024 1024)) ;; 1mb for LSP
+
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+
   (setq
    column-number-mode       t
    explicit-shell-file-name "/opt/homebrew/bin/fish"

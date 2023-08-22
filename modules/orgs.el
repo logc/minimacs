@@ -42,4 +42,6 @@
   :hook (org-mode . org-bullets-mode)
   :config
   (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+(use-package htmlize)
 ;;; orgs.el ends here
