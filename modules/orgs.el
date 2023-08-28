@@ -44,4 +44,13 @@
   (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 (use-package htmlize)
+
+;; This function is here because I intend to use it for org-capture ...
+(defun copy-file-link-to-clipboard ()
+  "Copy current line in file to clipboard as 'file:</path/to/file>::<line-number>'."
+  (interactive)
+  (let ((path-with-line-number
+         (concat "file:" (buffer-file-name) "::" (number-to-string (line-number-at-pos)))))
+    (kill-new path-with-line-number)
+    (message (concat path-with-line-number " copied to clipboard"))))
 ;;; orgs.el ends here
