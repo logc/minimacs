@@ -19,4 +19,5 @@
 
 (use-package pyvenv)
 
+(use-package hy-mode)
 ;;; python.el ends here

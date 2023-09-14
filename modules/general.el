@@ -16,6 +16,11 @@
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
 
+  ;(set-frame-parameter nil 'alpha-background 10)
+
+  ;; Mark all themes as safe
+  (setq custom-safe-themes t)
+
   (setq
    column-number-mode       t
    explicit-shell-file-name "/opt/homebrew/bin/fish"
@@ -41,7 +46,7 @@
   (setq insert-directory-program "/opt/homebrew/bin/gls")
 
   ;; GPG settings
-  (custom-set-variables '(epg-gpg-program  "/opt/homebrew/bin/gpg"))
+  (setq epg-gpg-program "/opt/homebrew/bin/gpg")
 
   ;; Settings for backup files
   (setq backup-directory-alist '(("." . "~/.config/emacs/backups"))
@@ -54,11 +59,37 @@
 
   ;; Make other-frame work on MacOS
   (setq mac-frame-tabbing nil)
+
+  ;; Tree-sitter grammars
+  (setq treesit-language-source-alist
+   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (toml "https://github.com/tree-sitter/tree-sitter-toml")
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
   )
 
-(use-package color-theme-sanityinc-tomorrow
-  :demand t
-  :init (load-theme 'sanityinc-tomorrow-night :no-confirm))
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-oksolar-dark :no-confirm t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
+(use-package solaire-mode
+  :ensure t
+  :config
+  (solaire-global-mode +1))
 
 (use-package smartparens
   :diminish smartparens-mode ;; Do not show in modeline
@@ -83,26 +114,13 @@
   :config
   (which-key-mode))
 
-(use-package minions
-  :defer 0.1
-  :config
-  (setq minions-mode-line-lighter "[+]")
-  (minions-mode 1))
-
-(use-package mood-line
-  :demand t
-  :defer 0.1
-  :after minions
-  :config
-  (defun mood-line-segment-major-mode ()
-    "Displays the current major mode in the mode-line."
-    (concat (format-mode-line minions-mode-line-modes 'mood-line-major-mode) "  "))
-   (mood-line-mode))
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
 
 (use-package hide-mode-line
   :demand t
   :hook (dashboard-after-initialize-hook . hide-mode-line-mode))
-
 
 (use-package direnv
   :demand t
@@ -114,6 +132,10 @@
   :bind (:map projectile-mode-map
 	      ("s-p" . projectile-command-map)
 	      ("C-c p" . projectile-command-map)))
+
+(use-package projectile-ripgrep)
+
+(use-package ripgrep)
 
 (use-package vertico
   :straight (vertico :files (:defaults "extensions/*")

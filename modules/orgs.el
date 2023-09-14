@@ -36,7 +36,18 @@
 	   "|"
 	   "OKAY(o)"
 	   "YES(y)"
-	   "NO(n)"))))
+	   "NO(n)")))
+  (with-eval-after-load "ox-latex"
+    (add-to-list 'org-latex-classes
+		 '("memoir"
+                 "\\documentclass{memoir}"
+                 ;; ("\\part{%s}"          . "\\part*{%s}")
+                 ("\\chapter{%s}"       . "\\chapter*{%s}")
+                 ("\\section{%s}"       . "\\section*{%s}")
+                 ("\\subsection{%s}"    . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}"     . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}"  . "\\subparagraph*{%s}")))))
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)
@@ -44,6 +55,8 @@
   (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 (use-package htmlize)
+
+
 
 ;; This function is here because I intend to use it for org-capture ...
 (defun copy-file-link-to-clipboard ()
