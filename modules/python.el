@@ -20,4 +20,6 @@
 (use-package pyvenv)
 
 (use-package hy-mode)
+
+(use-package jupyter)
 ;;; python.el ends here

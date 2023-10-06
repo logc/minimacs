@@ -13,4 +13,5 @@
 	       '("ghe.spotify.net" "ghe.spotify.net/api/v3"
 		 "ghe.spotify.net" forge-github-repository)))
 
+(use-package git-timemachine)
 ;;; magit.el ends here

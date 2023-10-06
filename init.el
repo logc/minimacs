@@ -9,7 +9,6 @@
   "Load FILENAME from the modules subdirectory."
   (load (concat user-emacs-directory "modules/" filename)))
 
-
 ;(with-gc-cons-threshold
 (setq gc-cons-threshold (* 100 1024 1024))
 (load-from-modules "preliminaries.el")

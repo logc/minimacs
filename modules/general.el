@@ -60,6 +60,11 @@
   ;; Make other-frame work on MacOS
   (setq mac-frame-tabbing nil)
 
+  ;; Keep track of recent files
+  (recentf-mode 1)
+  (setq recentf-max-menu-items 25)
+  (setq recentf-max-saved-items 25)
+
   ;; Tree-sitter grammars
   (setq treesit-language-source-alist
    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
@@ -69,8 +74,9 @@
      (json "https://github.com/tree-sitter/tree-sitter-json")
      (markdown "https://github.com/ikatyang/tree-sitter-markdown")
      (python "https://github.com/tree-sitter/tree-sitter-python")
+     (scala "https://github.com/tree-sitter/tree-sitter-scala")
      (toml "https://github.com/tree-sitter/tree-sitter-toml")
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml"))) 
   )
 
 (use-package doom-themes
@@ -79,12 +85,13 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-oksolar-dark :no-confirm t)
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
   ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+  (doom-themes-org-config)
+  :init
+  (load-theme 'doom-oksolar-dark))
 
 (use-package solaire-mode
   :ensure t
@@ -107,7 +114,7 @@
 	dashboard-set-heading-icons t
 	dashboard-show-shortcuts nil
 	dashboard-items '((projects . 3)
-			  (agenda . 5))))
+			  (agenda . 10))))
 
 (use-package which-key
   :demand t
@@ -131,11 +138,30 @@
   :init (projectile-mode +1)
   :bind (:map projectile-mode-map
 	      ("s-p" . projectile-command-map)
-	      ("C-c p" . projectile-command-map)))
+	      ("C-c p" . projectile-command-map))
 
-(use-package projectile-ripgrep)
+  :config
+  (setq projectile-globally-ignored-directories
+  '(".idea"
+    ".vscode"
+    ".ensime_cache"
+    ".eunit"
+    ".git"
+    ".hg"
+    ".fslckout"
+    "_FOSSIL_"
+    ".bzr"
+    "_darcs"
+    ".tox"
+    ".svn"
+    ".stack-work"
+    ".ccls-cache"
+    ".cache"
+    ".clangd")))
 
-(use-package ripgrep)
+(use-package consult)
+
+;(use-package ripgrep)
 
 (use-package vertico
   :straight (vertico :files (:defaults "extensions/*")
@@ -292,4 +318,6 @@ default lsp-passthrough."
     :hook (compilation-filter . ansi-color-compilation-filter)) 
 
 (use-package tabspaces)
+
+(use-package yaml-ts-mode)
 ;;; general.el ends here

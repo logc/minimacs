@@ -22,17 +22,18 @@
   (progn
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key "<SPC>" 'execute-extended-command)
+    (evil-leader/set-key "/" 'consult-ripgrep)
+    (evil-leader/set-key "bb" 'consult-buffer)
+    (evil-leader/set-key "bd" 'kill-current-buffer)
     (evil-leader/set-key "ff" 'find-file)
     (evil-leader/set-key "fs" 'save-buffer)
-    (evil-leader/set-key "bb" 'ibuffer)
-    (evil-leader/set-key "bd" 'kill-current-buffer)
     (evil-leader/set-key "gg" 'magit-status)
     (evil-leader/set-key "pp" 'projectile-switch-project)
-    (evil-leader/set-key "w" evil-window-map)
-    (evil-leader/set-key "wd" 'delete-window)
     (evil-leader/set-key "qq" 'save-buffers-kill-emacs)
     (evil-leader/set-key "qr" 'restart-emacs)
     (evil-leader/set-key "tF" 'toggle-frame-fullscreen)
+    (evil-leader/set-key "w" evil-window-map)
+    (evil-leader/set-key "wd" 'delete-window)
 
     ;; TODO: only in scala-mode
     (evil-leader/set-key "bb" 'run-sbt)))
