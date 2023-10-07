@@ -180,6 +180,7 @@
   (vertico-mode))
 
 (use-package vertico-posframe
+  :if (window-system)
   :hook (vertico-mode . vertico-posframe-mode)
   :init (vertico-posframe-mode 1))
 
