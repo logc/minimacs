@@ -13,6 +13,15 @@
   (:map org-mode-map
 	("<tab>" . org-cycle))
   :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((latex . t)
+     (plantuml . t)))
+  ; NOTE: this is not portable
+  (setq org-plantuml-jar-path "/opt/homebrew/Cellar/plantuml/1.2023.11/libexec/plantuml.jar")
+  ; NOTE: this might be unsafe
+  (setq org-confirm-babel-evaluate nil)
+
   (setq org-agenda-files '("~/Dropbox/Documents/org/agendas/"))
   (setq org-todo-keywords
 	'((sequence
@@ -57,6 +66,14 @@
 (use-package htmlize)
 
 
+(use-package org-re-reveal
+  :defer t
+  :after org
+  :init
+  (add-hook 'org-mode-hook (lambda () (require 'org-re-reveal)))
+  :config
+  (add-to-list 'org-export-backends 're-reveal)
+  (setq org-re-reveal-revealjs-version "4"))
 
 ;; This function is here because I intend to use it for org-capture ...
 (defun copy-file-link-to-clipboard ()
