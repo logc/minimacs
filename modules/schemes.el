@@ -5,6 +5,6 @@
 
 ;;; Code:
 (use-package geiser-kawa :ensure t)
-(use-package geiser-racket :ensure t)
+(use-package racket-mode)
 
 ;;; schemes.el ends here
