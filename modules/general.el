@@ -59,7 +59,7 @@
      (python "https://github.com/tree-sitter/tree-sitter-python")
      (scala "https://github.com/tree-sitter/tree-sitter-scala")
      (toml "https://github.com/tree-sitter/tree-sitter-toml")
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml"))) 
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
   ;; Line numbers in programming modes
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
