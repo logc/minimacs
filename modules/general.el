@@ -77,6 +77,9 @@
      (scala "https://github.com/tree-sitter/tree-sitter-scala")
      (toml "https://github.com/tree-sitter/tree-sitter-toml")
      (yaml "https://github.com/ikatyang/tree-sitter-yaml"))) 
+
+  ;; Line numbers in programmind modes
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   )
 
 (use-package doom-themes
@@ -321,4 +324,10 @@ default lsp-passthrough."
 (use-package tabspaces)
 
 (use-package yaml-ts-mode)
+
+;; Use the Debug Adapter Protocol for running tests and debugging
+(use-package dap-mode
+  :hook
+  (lsp-mode . dap-mode)
+  (lsp-mode . dap-ui-mode))
 ;;; general.el ends here

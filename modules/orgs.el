@@ -22,6 +22,8 @@
   ; NOTE: this might be unsafe
   (setq org-confirm-babel-evaluate nil)
 
+  (require 'org-tempo)
+
   (setq org-agenda-files '("~/Dropbox/Documents/org/agendas/"))
   (setq org-todo-keywords
 	'((sequence
