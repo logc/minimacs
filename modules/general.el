@@ -10,13 +10,6 @@
 
 (use-package emacs
   :init
-  (setq read-process-output-max (* 1024 1024)) ;; 1mb for LSP
-
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-
-  ;(set-frame-parameter nil 'alpha-background 10)
 
   ;; Mark all themes as safe
   (setq custom-safe-themes t)
@@ -78,10 +71,11 @@
      (toml "https://github.com/tree-sitter/tree-sitter-toml")
      (yaml "https://github.com/ikatyang/tree-sitter-yaml"))) 
 
-  ;; Line numbers in programmind modes
+  ;; Line numbers in programming modes
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   )
 
+;; Theme
 (use-package doom-themes
   :ensure t
   :config

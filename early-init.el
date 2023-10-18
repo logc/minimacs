@@ -1,6 +1,18 @@
 ;; Disable package.el in favor of straight.el
 (setq package-enable-at-startup nil)
 
+(setq read-process-output-max (* 1024 1024)) ;; 1mb for LSP
+
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; Frame
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+(setq
+ ns-use-proxy-icon nil
+ frame-title-format nil)
 
 (defmacro with-gc-cons-threshold (threshold &rest body)
   "Execute BODY with GC threshold temporarily set to THRESHOLD.
