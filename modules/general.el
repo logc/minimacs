@@ -104,13 +104,19 @@
 
 (use-package dashboard
   :demand t
+  :custom
+  (dashboard-banner-logo-title (shell-command-to-string "fortune -s"))
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner (concat user-emacs-directory "minimacs.txt")
 	dashboard-center-content t
-	dashboard-set-heading-icons t
-	dashboard-show-shortcuts nil
+	dashboard-display-icons-p t
+	dashboard-icon-type 'nerd-icons
+	dashboard-set-footer nil
+	dashboard-set-init-info nil
+	dashboard-projects-backend 'projectile
 	dashboard-items '((projects . 3)
+			  (bookmarks . 3)
 			  (agenda . 10))))
 
 (use-package which-key
@@ -324,4 +330,8 @@ default lsp-passthrough."
   :hook
   (lsp-mode . dap-mode)
   (lsp-mode . dap-ui-mode))
+
+(use-package format-all
+  :hook (prog-mode . format-all-ensure-formatter))
 ;;; general.el ends here
+

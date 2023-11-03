@@ -18,7 +18,7 @@
    '((latex . t)
      (plantuml . t)))
   ; NOTE: this is not portable
-  (setq org-plantuml-jar-path "/opt/homebrew/Cellar/plantuml/1.2023.11/libexec/plantuml.jar")
+  (setq org-plantuml-jar-path "/opt/homebrew/opt/plantuml/libexec/plantuml.jar")
   ; NOTE: this might be unsafe
   (setq org-confirm-babel-evaluate nil)
 
