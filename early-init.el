@@ -1,6 +1,7 @@
 ;; Disable package.el in favor of straight.el
 (setq package-enable-at-startup nil)
 
+;; General early changes
 (setq read-process-output-max (* 1024 1024)) ;; 1mb for LSP
 
 (menu-bar-mode -1)
