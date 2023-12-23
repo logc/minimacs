@@ -12,6 +12,7 @@
   ;; that, and should probably be PRed to org.
   (:map org-mode-map
 	("<tab>" . org-cycle))
+
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -58,15 +59,13 @@
                  ("\\subsection{%s}"    . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}"     . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}"  . "\\subparagraph*{%s}")))))
+                 ("\\subparagraph{%s}"  . "\\subparagraph*{%s}"))))
 
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode)
-  :config
-  (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+  ;; Resize headings
+  (set-face-attribute 'org-level-1 nil :height 1.8)
+  (set-face-attribute 'org-document-title nil :height 2.0))
 
 (use-package htmlize)
-
 
 (use-package org-re-reveal
   :defer t
@@ -76,6 +75,35 @@
   :config
   (add-to-list 'org-export-backends 're-reveal)
   (setq org-re-reveal-revealjs-version "4"))
+
+(use-package writeroom-mode
+  :ensure t
+  :hook ((org-mode . writeroom-mode)
+	 (org-mode . visual-line-mode))
+  :after org
+  :config
+  (setq writeroom-width 120))
+
+(use-package mixed-pitch
+  :hook
+  (writeroom-mode . mixed-pitch-mode)
+  :config
+  (setq mixed-pitch-set-height t)
+  (set-face-attribute 'variable-pitch nil :font "Charter" :height 180)
+  (set-face-attribute 'fixed-pitch nil :height 180)
+)
+
+(use-package org-superstar              ; supersedes `org-bullets'
+  :ensure
+  :after org
+  :hook (org-mode . org-superstar-mode)
+  :config
+  (setq org-superstar-headline-bullets-list '("◈" "◉" "○" "▷")) ;; '(" ")
+  (setq org-superstar-remove-leading-stars t)
+  (setq org-superstar-item-bullet-alist
+        '((?+ . ?•)
+          (?* . ?➤)
+          (?- . ?–))))
 
 ;; This function is here because I intend to use it for org-capture ...
 (defun copy-file-link-to-clipboard ()

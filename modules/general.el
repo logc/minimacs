@@ -10,7 +10,6 @@
 
 (use-package emacs
   :init
-
   ;; Mark all themes as safe
   (setq custom-safe-themes t)
 
@@ -31,7 +30,11 @@
   (setq enable-recursive-minibuffers t)
 
   :config
-  (set-frame-font "Berkeley Mono 14" nil t)
+  ;; set faces
+  (set-face-attribute 'default nil :family "Berkeley Mono" :height 140)
+  (set-face-attribute 'variable-pitch nil :family "Berkeley Mono Variable" :height 140)
+  (copy-face 'default 'fixed-pitch)
+
   (setq use-package-always-defer t)
   (setq confirm-kill-emacs #'y-or-n-p)
   
@@ -73,7 +76,7 @@
 
   ;; Line numbers in programming modes
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-  )
+)
 
 ;; Theme
 (use-package doom-themes
