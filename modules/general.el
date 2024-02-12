@@ -79,21 +79,25 @@
 )
 
 ;; Theme
-(use-package doom-themes
+
+;(use-package doom-themes
+;  :ensure t
+;  :config
+;  ;; Global settings (defaults)
+;  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+;        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;
+;  ;; Enable flashing mode-line on errors
+;  (doom-themes-visual-bell-config)
+;
+;  ;; Corrects (and improves) org-mode's native fontification.
+;  (doom-themes-org-config))
+
+(use-package ef-themes
   :ensure t
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config)
-
   :init
-  (load-theme 'doom-oksolar-dark))
+  (load-theme 'ef-elea-dark t)
+  (setq ef-themes-to-toggle '(ef-elea-dark ef-elea-light)))
 
 (use-package solaire-mode
   :ensure t
@@ -120,8 +124,8 @@
 	dashboard-set-footer nil
 	dashboard-set-init-info nil
 	dashboard-projects-backend 'projectile
-	dashboard-items '((projects . 3)
-			  (bookmarks . 3)
+	dashboard-items '((projects . 5)
+			  (bookmarks . 5)
 			  (agenda . 10))))
 
 (use-package which-key
@@ -383,10 +387,10 @@ default lsp-passthrough."
   :after (treemacs magit)
   :ensure t)
 
-(use-package treemacs-nerd-icons
-  :demand t
-  :config
-  (treemacs-load-theme "nerd-icons"))
+;(use-package treemacs-nerd-icons
+;  :demand t
+;  :config
+;  (treemacs-load-theme "nerd-icons"))
 
 (use-package nerd-icons-dired
   :hook

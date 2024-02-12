@@ -22,6 +22,7 @@
 (load-from-modules "bigquery.el")
 (load-from-modules "schemes.el")
 (load-from-modules "zig.el")
+(load-from-modules "common-lisp.el")
 ;)
 
 (provide 'init)

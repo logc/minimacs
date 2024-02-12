@@ -10,6 +10,7 @@ eshell/
 history
 projectile-bookmarks.eld
 projectile.cache
+projectile.projects
 projects
 recentf
 straight/
@@ -18,3 +19,5 @@ transient/
 /tree-sitter/
 url/
 *.sqlite
+
+/racket-mode/
