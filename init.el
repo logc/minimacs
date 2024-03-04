@@ -23,6 +23,7 @@
 (load-from-modules "schemes.el")
 (load-from-modules "zig.el")
 (load-from-modules "common-lisp.el")
+(load-from-modules "fish.el")
 ;)
 
 (provide 'init)

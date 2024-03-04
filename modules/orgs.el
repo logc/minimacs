@@ -62,8 +62,9 @@
                  ("\\subparagraph{%s}"  . "\\subparagraph*{%s}"))))
 
   ;; Resize headings
-  (set-face-attribute 'org-level-1 nil :height 1.8)
-  (set-face-attribute 'org-document-title nil :height 2.0))
+  ;(set-face-attribute 'org-level-1 nil :height 1.8)
+  ;(set-face-attribute 'org-document-title nil :height 2.0)
+  )
 
 (use-package htmlize)
 
@@ -75,23 +76,6 @@
   :config
   (add-to-list 'org-export-backends 're-reveal)
   (setq org-re-reveal-revealjs-version "4"))
-
-(use-package writeroom-mode
-  :ensure t
-  :hook ((org-mode . writeroom-mode)
-	 (org-mode . visual-line-mode))
-  :after org
-  :config
-  (setq writeroom-width 120))
-
-(use-package mixed-pitch
-  :hook
-  (writeroom-mode . mixed-pitch-mode)
-  :config
-  (setq mixed-pitch-set-height t)
-  (set-face-attribute 'variable-pitch nil :font "Charter" :height 180)
-  (set-face-attribute 'fixed-pitch nil :height 180)
-)
 
 (use-package org-superstar              ; supersedes `org-bullets'
   :ensure
