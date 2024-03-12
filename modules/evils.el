@@ -34,10 +34,7 @@
     (evil-leader/set-key "tF" 'toggle-frame-fullscreen)
     (evil-leader/set-key "w" evil-window-map)
     (evil-leader/set-key "wd" 'delete-window)
-    (evil-leader/set-key "wa" 'ace-window)
-
-    ;; TODO: only in scala-mode
-    (evil-leader/set-key "bb" 'run-sbt)))
+    (evil-leader/set-key "wa" 'ace-window)))
 
 (use-package evil-collection
   :after evil
