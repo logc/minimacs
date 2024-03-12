@@ -24,6 +24,7 @@
 (load-from-modules "zig.el")
 (load-from-modules "common-lisp.el")
 (load-from-modules "fish.el")
+(load-from-modules "lua.el")
 ;)
 
 (provide 'init)
