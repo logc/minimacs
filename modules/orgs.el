@@ -60,11 +60,8 @@
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}"     . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}"  . "\\subparagraph*{%s}"))))
-
-  ;; Resize headings
-  ;(set-face-attribute 'org-level-1 nil :height 1.8)
-  ;(set-face-attribute 'org-document-title nil :height 2.0)
-  )
+  ;; do not truncate, wrap lines instead
+  (setq org-startup-truncated nil))
 
 (use-package htmlize)
 
