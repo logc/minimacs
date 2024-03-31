@@ -373,10 +373,10 @@ default lsp-passthrough."
   :after (treemacs magit)
   :ensure t)
 
-;(use-package treemacs-nerd-icons
-;  :demand t
-;  :config
-;  (treemacs-load-theme "nerd-icons"))
+(use-package treemacs-nerd-icons
+  :demand t
+  :config
+  (treemacs-load-theme "nerd-icons"))
 
 (use-package nerd-icons-dired
   :hook
