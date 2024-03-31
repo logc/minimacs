@@ -22,8 +22,8 @@
   (progn
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key "<SPC>" 'execute-extended-command)
+    (evil-leader/set-key "jj" 'consult-buffer)
     (evil-leader/set-key "/" 'consult-ripgrep)
-    (evil-leader/set-key "bb" 'consult-buffer)
     (evil-leader/set-key "bd" 'kill-current-buffer)
     (evil-leader/set-key "ff" 'find-file)
     (evil-leader/set-key "fs" 'save-buffer)
