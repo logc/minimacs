@@ -31,8 +31,8 @@
 
   :config
   ;; set faces
-  (set-face-attribute 'default nil :family "Berkeley Mono" :height 140)
-  (set-face-attribute 'variable-pitch nil :family "Berkeley Mono Variable" :height 140)
+  (set-face-attribute 'default nil :family "Fira Mono" :height 140)
+  (set-face-attribute 'variable-pitch nil :family "Fira Sans" :height 140)
   (copy-face 'default 'fixed-pitch)
 
   (setq use-package-always-defer t)
@@ -76,26 +76,9 @@
 
   ;; Line numbers in programming modes
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+  (setq-default line-spacing 2)
 )
-
-;; Theme
-
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :init
-  (load-theme 'sanityinc-tomorrow-eighties))
-
-(use-package solaire-mode
-  :ensure t
-  :config
-  (solaire-global-mode +1))
-
-(use-package smartparens
-  :diminish smartparens-mode ;; Do not show in modeline
-  :init
-  (require 'smartparens-config)
-  :config
-  (smartparens-global-mode t))
 
 (use-package dashboard
   :demand t
@@ -113,6 +96,52 @@
 	dashboard-items '((projects . 5)
 			  (bookmarks . 5)
 			  (agenda . 10))))
+
+;; Theme
+
+(use-package color-theme-sanityinc-tomorrow)
+
+(use-package solaire-mode
+  :ensure t
+  :config
+  (solaire-global-mode +1))
+
+(use-package modus-themes
+  :custom
+  (modus-themes-custom-auto-reload t)
+  (modus-themes-italic-constructs t)
+  (modus-themes-bold-constructs nil)
+  (modus-themes-mixed-fonts t)
+  (modus-themes-variable-pitch-ui nil)
+  (modus-themes-custom-auto-reload t)
+  (modus-themes-disable-other-themes t)
+  (modus-themes-prompts '(italic bold))
+  ( modus-themes-completions
+    '((matches . (extrabold))
+      (selection . (semibold italic text-also))))
+  (modus-themes-org-blocks 'gray-background) ; {nil,'gray-background,'tinted-background}
+  (modus-themes-headings
+   '((1 . (variable-pitch 1.5))
+     (2 . (1.1))
+     (agenda-date . (1.3))
+     (agenda-structure . (variable-pitch light 1.8))
+     (t . (1.1))))
+  (modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
+
+  :init
+  (load-theme 'sanityinc-tomorrow-eighties)
+  )
+
+;; Editing
+
+(use-package smartparens
+  :diminish smartparens-mode ;; Do not show in modeline
+  :init
+  (require 'smartparens-config)
+  :config
+  (smartparens-global-mode t))
+
+
 
 (use-package which-key
   :demand t
@@ -384,7 +413,7 @@ default lsp-passthrough."
 
 (use-package nerd-icons
   :custom
-  (nerd-icons-font-family "Hack Nerd Font"))
+  (nerd-icons-font-family "FiraMono Nerd Font"))
 
 ;; Here 'completion' means 'vertico'
 (use-package nerd-icons-completion
