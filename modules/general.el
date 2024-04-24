@@ -9,6 +9,7 @@
   :custom (straight-use-package-by-default t))
 
 (use-package emacs
+
   :init
   ;; Mark all themes as safe
   (setq custom-safe-themes t)
@@ -98,6 +99,20 @@
 			  (agenda . 10))))
 
 ;; Theme
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config)
+  :init
+  (load-theme 'doom-oksolar-dark))
 
 (use-package color-theme-sanityinc-tomorrow)
 
@@ -126,11 +141,7 @@
      (agenda-date . (1.3))
      (agenda-structure . (variable-pitch light 1.8))
      (t . (1.1))))
-  (modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
-
-  :init
-  (load-theme 'sanityinc-tomorrow-eighties)
-  )
+  (modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)))
 
 ;; Editing
 
