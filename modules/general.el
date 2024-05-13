@@ -9,7 +9,6 @@
   :custom (straight-use-package-by-default t))
 
 (use-package emacs
-
   :init
   ;; Mark all themes as safe
   (setq custom-safe-themes t)
@@ -151,7 +150,6 @@
   (require 'smartparens-config)
   :config
   (smartparens-global-mode t))
-
 
 
 (use-package which-key
@@ -455,4 +453,3 @@ default lsp-passthrough."
 (use-package format-all
   :hook (prog-mode . format-all-ensure-formatter))
 ;;; general.el ends here
-
