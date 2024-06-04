@@ -59,4 +59,11 @@
 ;;   lsp-mode can activate it automatically.
 (use-package lsp-ui)
 
+(use-package format-all
+  :commands format-all-mode
+  :hook (prog-mode . format-all-mode)
+  :config
+  (setq-default format-all-formatters
+                '(("Scala"     (scalafmt)))))
+
 ;;; scala.el ends here

@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 ;;;  general configuration settings that either involve the `emacs` package,
-;;;  or affect the whole experience like theming
+;;;  or affect the whole experience of using the editor
 
 ;;; Code:
 (use-package straight
@@ -11,7 +11,7 @@
 (use-package emacs
   :init
   ;; Mark all themes as safe
-  (setq custom-safe-themes t)
+					;(setq custom-safe-themes t)
 
   (setq
    column-number-mode       t
@@ -37,7 +37,7 @@
 
   (setq use-package-always-defer t)
   (setq confirm-kill-emacs #'y-or-n-p)
-  
+
   ;; Use coreutils gls for dired
   (setq insert-directory-program "/opt/homebrew/bin/gls")
 
@@ -63,22 +63,22 @@
 
   ;; Tree-sitter grammars
   (setq treesit-language-source-alist
-   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-     (css "https://github.com/tree-sitter/tree-sitter-css")
-     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-     (html "https://github.com/tree-sitter/tree-sitter-html")
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-     (python "https://github.com/tree-sitter/tree-sitter-python")
-     (scala "https://github.com/tree-sitter/tree-sitter-scala")
-     (toml "https://github.com/tree-sitter/tree-sitter-toml")
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml"))) 
+	'((bash "https://github.com/tree-sitter/tree-sitter-bash")
+	  (css "https://github.com/tree-sitter/tree-sitter-css")
+	  (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+	  (html "https://github.com/tree-sitter/tree-sitter-html")
+	  (json "https://github.com/tree-sitter/tree-sitter-json")
+	  (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+	  (python "https://github.com/tree-sitter/tree-sitter-python")
+	  (scala "https://github.com/tree-sitter/tree-sitter-scala")
+	  (toml "https://github.com/tree-sitter/tree-sitter-toml")
+	  (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
   ;; Line numbers in programming modes
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
   (setq-default line-spacing 2)
-)
+  )
 
 (use-package dashboard
   :demand t
@@ -96,51 +96,6 @@
 	dashboard-items '((projects . 5)
 			  (bookmarks . 5)
 			  (agenda . 10))))
-
-;; Theme
-(use-package doom-themes
-  :ensure t
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config)
-  :init
-  (load-theme 'doom-oksolar-dark))
-
-(use-package color-theme-sanityinc-tomorrow)
-
-(use-package solaire-mode
-  :ensure t
-  :config
-  (solaire-global-mode +1))
-
-(use-package modus-themes
-  :custom
-  (modus-themes-custom-auto-reload t)
-  (modus-themes-italic-constructs t)
-  (modus-themes-bold-constructs nil)
-  (modus-themes-mixed-fonts t)
-  (modus-themes-variable-pitch-ui nil)
-  (modus-themes-custom-auto-reload t)
-  (modus-themes-disable-other-themes t)
-  (modus-themes-prompts '(italic bold))
-  ( modus-themes-completions
-    '((matches . (extrabold))
-      (selection . (semibold italic text-also))))
-  (modus-themes-org-blocks 'gray-background) ; {nil,'gray-background,'tinted-background}
-  (modus-themes-headings
-   '((1 . (variable-pitch 1.5))
-     (2 . (1.1))
-     (agenda-date . (1.3))
-     (agenda-structure . (variable-pitch light 1.8))
-     (t . (1.1))))
-  (modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)))
 
 ;; Editing
 
@@ -178,26 +133,26 @@
 
   :config
   (setq projectile-globally-ignored-directories
-  '(".idea"
-    ".vscode"
-    ".ensime_cache"
-    ".eunit"
-    ".git"
-    ".hg"
-    ".fslckout"
-    "_FOSSIL_"
-    ".bzr"
-    "_darcs"
-    ".tox"
-    ".svn"
-    ".stack-work"
-    ".ccls-cache"
-    ".cache"
-    ".clangd")))
+	'(".idea"
+	  ".vscode"
+	  ".ensime_cache"
+	  ".eunit"
+	  ".git"
+	  ".hg"
+	  ".fslckout"
+	  "_FOSSIL_"
+	  ".bzr"
+	  "_darcs"
+	  ".tox"
+	  ".svn"
+	  ".stack-work"
+	  ".ccls-cache"
+	  ".cache"
+	  ".clangd")))
 
 (use-package consult)
 
-;(use-package ripgrep)
+					;(use-package ripgrep)
 
 (use-package vertico
   :straight (vertico :files (:defaults "extensions/*")
@@ -382,7 +337,7 @@ default lsp-passthrough."
       (treemacs-git-commit-diff-mode t))
 
     (pcase (cons (not (null (executable-find "git")))
-                 (not (null treemacs-python-executable)))
+		 (not (null treemacs-python-executable)))
       (`(t . t)
        (treemacs-git-mode 'deferred))
       (`(t . _)
@@ -391,16 +346,17 @@ default lsp-passthrough."
     (treemacs-hide-gitignored-files-mode nil))
   :bind
   (:map global-map
-        ("M-0"       . treemacs-select-window)
-        ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
-        ("C-x t d"   . treemacs-select-directory)
-        ("C-x t B"   . treemacs-bookmark)
-        ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag)))
+	("M-0"       . treemacs-select-window)
+	("C-x t 1"   . treemacs-delete-other-windows)
+	("C-x t t"   . treemacs)
+	("C-x t d"   . treemacs-select-directory)
+	("C-x t B"   . treemacs-bookmark)
+	("C-x t C-t" . treemacs-find-file)
+	("C-x t M-t" . treemacs-find-tag)))
 
 (use-package treemacs-evil
   :after (treemacs evil)
+  :demand t
   :ensure t)
 
 (use-package treemacs-projectile
@@ -433,12 +389,12 @@ default lsp-passthrough."
   (nerd-icons-completion-mode))
 
 (use-package vterm
-    :ensure t)
+  :ensure t)
 
 (use-package helpful)
 
 (use-package ansi-color
-    :hook (compilation-filter . ansi-color-compilation-filter)) 
+  :hook (compilation-filter . ansi-color-compilation-filter))
 
 (use-package tabspaces)
 

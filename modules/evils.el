@@ -4,6 +4,7 @@
 ;;;  configuration of evil-mode and evil-related packages like evil-collection
 
 ;;; Code:
+
 (use-package evil
   :hook (after-init . evil-mode)
   :init

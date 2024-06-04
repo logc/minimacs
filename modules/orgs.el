@@ -12,14 +12,20 @@
   ;; that, and should probably be PRed to org.
   (:map org-mode-map
 	("<tab>" . org-cycle))
+
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((latex . t)
+     (gnuplot . t)
+     (python . t)
      (plantuml . t)))
-  ; NOTE: this is not portable
+
+  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+
+					; NOTE: this is not portable
   (setq org-plantuml-jar-path "/opt/homebrew/opt/plantuml/libexec/plantuml.jar")
-  ; NOTE: this might be unsafe
+					; NOTE: this might be unsafe
   (setq org-confirm-babel-evaluate nil)
 
   (require 'org-tempo)
@@ -51,18 +57,20 @@
   (with-eval-after-load "ox-latex"
     (add-to-list 'org-latex-classes
 		 '("memoir"
-                 "\\documentclass{memoir}"
-                 ;; ("\\part{%s}"          . "\\part*{%s}")
-                 ("\\chapter{%s}"       . "\\chapter*{%s}")
-                 ("\\section{%s}"       . "\\section*{%s}")
-                 ("\\subsection{%s}"    . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}"     . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}"  . "\\subparagraph*{%s}"))))
-  ;; do not truncate, wrap lines instead
-  (setq org-startup-truncated nil
-	org-startup-indented t
-	org-startup-folded t)
+                   "\\documentclass{memoir}"
+                   ;; ("\\part{%s}"          . "\\part*{%s}")
+                   ("\\chapter{%s}"       . "\\chapter*{%s}")
+                   ("\\section{%s}"       . "\\section*{%s}")
+                   ("\\subsection{%s}"    . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}"     . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}"  . "\\subparagraph*{%s}"))))
+
+  (setq
+   org-startup-truncated nil
+   org-startup-folded t
+   org-hide-leading-stars t
+   )
   )
 
 (use-package htmlize)
@@ -75,6 +83,8 @@
   :config
   (add-to-list 'org-export-backends 're-reveal)
   (setq org-re-reveal-revealjs-version "4"))
+
+(use-package gnuplot)
 
 ;; This function is here because I intend to use it for org-capture ...
 (defun copy-file-link-to-clipboard ()
