@@ -106,7 +106,6 @@
   :config
   (smartparens-global-mode t))
 
-
 (use-package which-key
   :demand t
   :config
@@ -151,8 +150,6 @@
 	  ".clangd")))
 
 (use-package consult)
-
-					;(use-package ripgrep)
 
 (use-package vertico
   :straight (vertico :files (:defaults "extensions/*")
@@ -268,6 +265,7 @@ default lsp-passthrough."
 ;; Restart
 (use-package restart-emacs)
 
+;; Navigation
 (use-package treemacs
   :ensure t
   :defer t
