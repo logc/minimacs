@@ -44,6 +44,7 @@
                             ;; Enable unicode icons. But be warned that emacs might not render unicode
                             ;; correctly in all cases.
                             "-J-Dmetals.icons=unicode"))
+  (lsp-metals-fallback-scala-version "3.3.3")
   ;; In case you want semantic highlighting. This also has to be enabled in lsp-mode using
   ;; `lsp-semantic-tokens-enable' variable. Also you might want to disable highlighting of modifiers
   ;; setting `lsp-semantic-tokens-apply-modifiers' to `nil' because metals sends `abstract' modifier

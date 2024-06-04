@@ -195,24 +195,26 @@
 (use-package lsp-mode
   :hook  (prog-mode . lsp-deferred)
   (lsp-mode . lsp-lens-mode)
+  :custom
+  (lsp-completion-provider :none)
   :config
   (setq lsp-idle-delay 0.500)
   (setq lsp-log-io nil)
-  (setq lsp-completion-provider :capf)
+					;(setq lsp-completion-provider :capf)
   (setq lsp-prefer-flymake nil)
   ;; Disable warning when mode derives from prog-mode but does not have LSP e.g. elisp
   (setq lsp-warn-no-matched-clients nil)
   (setq lsp-enable-snippet nil))
 
 (use-package corfu
-  :hook (lsp-completion-mode . kb/corfu-setup-lsp) ; Use corfu for lsp completion
+  :hook (lsp-completion-mode . corfu-setup-lsp) ; Use corfu for lsp completion
   :custom
   ;; Works with `indent-for-tab-command'. Make sure tab doesn't indent when you
   ;; want to perform completion
   (tab-always-indent 'complete)
   (completion-cycle-threshold nil)      ; Always show candidates in menu
 
-  (corfu-auto nil)
+  (corfu-auto t)
   (corfu-auto-prefix 2)
   (corfu-auto-delay 0.25)
 
@@ -256,7 +258,7 @@
   (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
 
   ;; Setup lsp to use corfu for lsp completion
-  (defun kb/corfu-setup-lsp ()
+  (defun corfu-setup-lsp ()
     "Use orderless completion style with lsp-capf instead of the
 default lsp-passthrough."
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
